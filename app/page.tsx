@@ -16,15 +16,25 @@ export default function Home() {
   
     try {
       const formData = new FormData(event.currentTarget);
-       await fetch("/api/search", {
+      const response = await fetch("/api/search", {
         method: "POST",
         body: formData,
       });
-      // Immediately show a toast notification
-      toast.success("Submitted. You will receive an email with the results.");
+    
+      // Check if the request was successful
+      if (response.ok) {
+        // You can also parse the JSON response if your server sends back JSON
+        // const data = await response.json();
+        toast.success("Submitted. You will receive an email with the results.");
+      } else {
+        // If the server responds with a status code outside of the range 200-299,
+        // you can throw a new error or handle it as you see fit
+        const errorData = await response.json(); // Assuming server responds with JSON
+        toast.error(`${errorData.error || response.status}`);
+      }
     } catch (error: any) {
-      // If an exception is thrown before the fetch, show an error toast
-      toast.error(`An error occurred: ${error.message}`);
+      // If an exception is thrown before the fetch or during the fetch, show an error toast
+      toast.error(`${error.message}`);
     } finally {
       setIsLoading(false); // Set loading to false
     }
