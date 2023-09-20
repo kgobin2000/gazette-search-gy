@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-import worker
+from worker import worker
 
 app = Flask(__name__)
 
