@@ -1,13 +1,14 @@
 # Gazette Search GY
 
 <p align="center">
-  <a href="https://your-portfolio-link.com/">
-    <img src="your-logo-link.png" height="96">
+  <a href="https://www.kgobin.com/">
     <h3 align="center">Gazette Search GY</h3>
   </a>
 </p>
 
 <p align="center">A Next.js application integrated with Django and BeautifulSoup to scrape and search the official gazette of Guyana.</p>
+
+<img src="./Screenshot.png" >
 
 ---
 
