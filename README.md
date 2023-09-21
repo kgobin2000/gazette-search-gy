@@ -1,78 +1,121 @@
+# Gazette Search GY
+
 <p align="center">
-  <a href="https://nextjs-flask-starter.vercel.app/">
-    <img src="https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" height="96">
-    <h3 align="center">Next.js Flask Starter</h3>
+  <a href="https://your-portfolio-link.com/">
+    <img src="your-logo-link.png" height="96">
+    <h3 align="center">Gazette Search GY</h3>
   </a>
 </p>
 
-<p align="center">Simple Next.js boilerplate that uses <a href="https://flask.palletsprojects.com/">Flask</a> as the API backend.</p>
+<p align="center">A Next.js application integrated with Django and BeautifulSoup to scrape and search the official gazette of Guyana.</p>
 
-<br/>
+---
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Frameworks](#frameworks-used)
+- [How It Works](#how-it-works)
+  - [URL Rewriting](#url-rewriting)
+  - [Local Development](#local-development)
+  - [Production](#production)
+- [Demo](#demo)
+- [Deploy Your Own](#deploy-your-own)
+- [Developing Locally](#developing-locally)
+- [Learn More](#learn-more)
+
+---
 
 ## Introduction
 
-This is a hybrid Next.js + Python app that uses Next.js as the frontend and Flask as the API backend. One great use case of this is to write Next.js apps that use Python AI libraries on the backend.
+This is a hybrid application that uses Next.js for the frontend and Django with BeautifulSoup for the backend. The application scrapes the official gazette of Guyana from [Official Gazette](https://officialgazette.gov.gy/) to help users search for their names, detect fraud, and monitor contracts. All scraped gazettes are stored in an S3 bucket, and search results are sent to users via Resend.
 
-## How It Works
+## Frameworks Used
 
-The Python/Flask server is mapped into to Next.js app under `/api/`.
+- **Frontend**: [Next.js](https://nextjs.org/)
+- **Backend**: [Django](https://www.djangoproject.com/)
+- **Web Scraping**: [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
+- **Cloud Storage**: [AWS S3](https://aws.amazon.com/s3/)
+- **Notification Service**: [Resend](https://your-resend-link.com/)
 
-This is implemented using [`next.config.js` rewrites](https://github.com/vercel/examples/blob/main/python/nextjs-flask/next.config.js) to map any request to `/api/:path*` to the Flask API, which is hosted in the `/api` folder.
+## Requirements
 
-On localhost, the rewrite will be made to the `127.0.0.1:5328` port, which is where the Flask server is running.
+### Create an S3 Bucket
 
-In production, the Flask server is hosted as [Python serverless functions](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python) on Vercel.
+1. Sign in to your AWS Management Console.
+2. Navigate to the S3 service and click on "Create Bucket".
+3. Name your bucket and configure its settings as per your requirements.
+4. Make sure to set the bucket permissions appropriately.
+5. Click "Create" to finalize the bucket creation.
 
-## Demo
+### Create a Resend Account
 
-https://nextjs-flask-starter.vercel.app/
+1. Visit [Resend's website](https://your-resend-link.com/) and click on "Sign Up".
+2. Fill in your details and verify your email address.
+3. Once your account is set up, navigate to the dashboard.
+4. Create a new project and configure the notification settings.
+5. Obtain the API keys or tokens required for integration with your application.
+
+---
+
+### URL Rewriting
+
+The Django/Python server is integrated into the Next.js app under `/api/`. URL rewriting is configured in `next.config.js` to map any request to `/api/:path*` to the Django API.
+
+### Local Development
+
+On localhost, the Django server will be running on a port that you can specify in `next.config.js`.
+
+### Production
+
+In production, the Django server can be hosted on any cloud service that supports Python and Django.
 
 ## Deploy Your Own
 
-You can clone & deploy it to Vercel with one click:
+You can clone & deploy this project with the following command:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?demo-title=Next.js%20Flask%20Starter&demo-description=Simple%20Next.js%20boilerplate%20that%20uses%20Flask%20as%20the%20API%20backend.&demo-url=https%3A%2F%2Fnextjs-flask-starter.vercel.app%2F&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F795TzKM3irWu6KBCUPpPz%2F44e0c6622097b1eea9b48f732bf75d08%2FCleanShot_2023-05-23_at_12.02.15.png&project-name=Next.js%20Flask%20Starter&repository-name=nextjs-flask-starter&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fnextjs-flask&from=vercel-examples-repo)
+\`\`\`bash
+git clone https://github.com/kgobin2000/gazette-search-gy
+\`\`\`
 
 ## Developing Locally
 
-You can clone & create this repo with the following command
-
-```bash
-npx create-next-app nextjs-flask --example "https://github.com/vercel/examples/tree/main/python/nextjs-flask"
-```
-
-## Getting Started
-
 First, install the dependencies:
 
-```bash
+\`\`\`bash
 npm install
+
 # or
+
 yarn
+
 # or
+
 pnpm install
-```
+\`\`\`
 
 Then, run the development server:
 
-```bash
+\`\`\`bash
 npm run dev
+
 # or
+
 yarn dev
+
 # or
+
 pnpm dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-The Flask server will be running on [http://127.0.0.1:5328](http://127.0.0.1:5328) – feel free to change the port in `package.json` (you'll also need to update it in `next.config.js`).
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The Django server will be running on a port specified in `next.config.js`.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
+- [Django Documentation](https://docs.djangoproject.com/en/3.2/) - Learn about Django features and API.
+- [BeautifulSoup Documentation](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - Learn how to scrape web pages with BeautifulSoup.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Flask Documentation](https://flask.palletsprojects.com/en/1.1.x/) - learn about Flask features and API.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+You can check out [the Gazette Search GY GitHub repository](https://github.com/kgobin2000/gazette-search-gy) - your feedback and contributions are welcome!
