@@ -85,6 +85,8 @@ First, install the dependencies:
 
 \`\`\`bash
 npm install
+Rename env.sample to env.local in the api folder
+Fill in your environment variables
 
 # or
 
