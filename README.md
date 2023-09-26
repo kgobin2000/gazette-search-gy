@@ -73,11 +73,20 @@ In production, the Django server can be hosted on any cloud service that support
 
 ## Deploy Your Own
 
-You can clone & deploy this project with the following command:
+You can clone this project with the following command:
 
 \`\`\`bash
 git clone https://github.com/kgobin2000/gazette-search-gy
 \`\`\`
+
+### Configure Environment Variables
+
+In order to configure your environment variables, follow these steps:
+
+1. Locate the `env.sample` file in the `api` folder of this project.
+2. Rename `env.sample` to `env.local`.
+3. Open the `env.local` file in a text editor.
+4. Inside `env.local`, you'll find a list of environment variables. Fill in the necessary values for your project.
 
 ## Developing Locally
 
@@ -85,31 +94,11 @@ First, install the dependencies:
 
 \`\`\`bash
 npm install
-Rename env.sample to env.local in the api folder
-Fill in your environment variables
-
-# or
-
-yarn
-
-# or
-
-pnpm install
-\`\`\`
 
 Then, run the development server:
 
 \`\`\`bash
 npm run dev
-
-# or
-
-yarn dev
-
-# or
-
-pnpm dev
-\`\`\`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The Django server will be running on a port specified in `next.config.js`.
 
