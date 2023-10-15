@@ -4,6 +4,7 @@ import requests
 import PyPDF2
 import re
 import logging
+from urllib.parse import urljoin
 
 s3 = boto3.client(
     "s3",
@@ -19,7 +20,6 @@ def sanitize_filename(filename):
 
 def update_files_in_s3(file_links, base_url, year_to_search):
     s3_bucket_name = os.environ.get("S3_BUCKET_NAME")
-
     # Get the list of existing files in the S3 bucket
     existing_files = []
     s3_objects = s3.list_objects_v2(Bucket=s3_bucket_name)
@@ -30,13 +30,19 @@ def update_files_in_s3(file_links, base_url, year_to_search):
     for link in file_links:
         try:
             file_url = link.get("href", "")
+            file_url = file_url.replace(
+                "\\", "/"
+            )  # convert backslashes to forward slashes
+
             last_part = file_url.split("\\")[-1]
             sanitized_name = sanitize_filename(last_part)
+
+            absolute_url = urljoin(base_url, file_url)
 
             # Check if the file already exists in the S3 bucket
             if sanitized_name not in existing_files:
                 temp_file_path = f"/tmp/{sanitized_name}"
-                with requests.get(file_url, stream=True) as r:
+                with requests.get(absolute_url, stream=True) as r:
                     r.raise_for_status()
                     with open(temp_file_path, "wb") as f:
                         for chunk in r.iter_content(chunk_size=8192):
